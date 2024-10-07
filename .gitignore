@@ -3,6 +3,16 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+out/production
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+*.mvn
+mvnw.cmd
+mvnw
 
 ### STS ###
 .apt_generated
@@ -12,12 +22,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +35,5 @@ build/
 
 ### VS Code ###
 .vscode/
+
+**/src/main/resources/application-local.properties
