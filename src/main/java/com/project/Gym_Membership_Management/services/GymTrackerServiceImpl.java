@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.Gym_Membership_Management.models.dtos.GymTrackerDTO;
 import com.project.Gym_Membership_Management.models.dtos.ClientDTO;
 import com.project.Gym_Membership_Management.models.entities.Client;
+import com.project.Gym_Membership_Management.models.entities.GymTracker;
 import com.project.Gym_Membership_Management.repositories.ClientRepository;
 import com.project.Gym_Membership_Management.repositories.GymTrackerRepository;
 
@@ -23,7 +24,11 @@ public class GymTrackerServiceImpl implements GymTrackerService {
 
     @Override
     public GymTrackerDTO createClient(GymTrackerDTO gymTrackerDTO) {
-        Client clientEntityToBeSaved = objectMapper.convertValue(ClientDTO, c)
+        Client  client = clientRepository.findById(gymTrackerDTO.getClientId()).orElseThrow(() -> new RuntimeException("Client with the id {}" + gymTrackerDTO.getClientId() + "is not found"));
+        GymTracker gymTrackerEntityToBeSaved = GymTrackerDTO.mapGymTrackerDTOToGymTracker(gymTrackerDTO);
+        gymTrackerEntityToBeSaved.setClientId(client.getId());
+ GymTracker gymTrackerResponseEntity = gymTrackerRepository.save(gymTrackerEntityToBeSaved);
+ return GymTrackerDTO.mapGymTrackerToGymTrackerDTO(gymTrackerResponseEntity);
     }
 
     @Override
@@ -37,8 +42,8 @@ public class GymTrackerServiceImpl implements GymTrackerService {
     }
 
     @Override
-    public List<ClientDTO> getRegisteredMembers(Long clientId) {
+    public List<ClientDTO> getRegisteredClients(Long clientId) {
         return List.of();
     }
-}
+
 }

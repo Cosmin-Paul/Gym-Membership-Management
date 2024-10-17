@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -15,7 +14,7 @@ import java.util.UUID;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
     @Column
     private String firstName;
     @Column
@@ -26,7 +25,9 @@ public class Client {
     private String phoneNumber;
     @Column
     private int age;
+    @Column
+    private char sex;
 
     @OneToMany
-    private Set<GymTracker> managedEvent = new HashSet();
+    private Set<GymTracker> gymManagement = new HashSet();
 }

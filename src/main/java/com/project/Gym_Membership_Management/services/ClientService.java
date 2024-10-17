@@ -1,13 +1,15 @@
 package com.project.Gym_Membership_Management.services;
 
+import com.project.Gym_Membership_Management.models.dtos.ClientDTO;
+import com.project.Gym_Membership_Management.models.dtos.GymTrackerDTO;
 import com.project.Gym_Membership_Management.models.entities.Client;
 
 import java.util.List;
 
 public interface ClientService {
 
-    Client createUser (Client client);
+    ClientDTO createClient(ClientDTO clientDTO);
 
-List<Client> getUsers(Long id);
+List<GymTrackerDTO> getClient(Long id);
 
 }

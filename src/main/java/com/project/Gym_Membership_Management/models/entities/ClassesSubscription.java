@@ -1,6 +1,6 @@
 package com.project.Gym_Membership_Management.models.entities;
 
-public enum SubscriptionType {
+public enum ClassesSubscription {
 
     PILATES,
     YOGA,
