@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ClientService {
         client.setId((new Client()).getId());
         Client updateClient = clientRepository.save(client);
         log.info(("Updated info for client id{}"));
-return objectMapper.convertValue(updateClient,ClientDTO.class);
+return (List<GymTrackerDTO>) objectMapper.convertValue(updateClient,ClientDTO.class);
     }
 
     @Override
