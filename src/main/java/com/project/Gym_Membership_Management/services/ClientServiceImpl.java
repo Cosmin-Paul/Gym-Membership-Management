@@ -1,6 +1,7 @@
 package com.project.Gym_Membership_Management.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.Gym_Membership_Management.exceptions.ClientNotFoundException;
 import com.project.Gym_Membership_Management.models.dtos.ClientDTO;
 import com.project.Gym_Membership_Management.models.dtos.GymTrackerDTO;
 import com.project.Gym_Membership_Management.models.entities.Client;
@@ -48,10 +49,23 @@ public class ClientServiceImpl implements ClientService {
                 .map(GymTrackerDTO::mapGymTrackerToGymTrackerDTO)
                 .toList();
         listGymTrackers.forEach(gymTrackerDTO -> gymTrackerDTO.setId(client.getId()));
-        return  listGymTrackers;
+        return listGymTrackers;
     }
 
-    public ClientDTO deleteClient(ClientDTO clientDTO) {
-        return clientDTO;
+
+    @Override
+    public List<GymTrackerDTO> updateClient(Long clientId, int client) {
+        Client client = clientRepository.findById(clientId).orElseThrow(()-> new ClientNotFoundException("Client with id " + clientId + " is not found"));
+        client.setId((new Client()).getId());
+        Client updateClient = clientRepository.save(client);
+        log.info(("Updated info for client id{}"));
+
+    }
+
+    @Override
+    public void deleteClientById(Long id) {
+        clientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("client..."));
+        clientRepository.deleteById(id);
+        log.info("Client with id {} was deleted", id);
     }
 }

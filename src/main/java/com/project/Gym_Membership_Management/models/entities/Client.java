@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
