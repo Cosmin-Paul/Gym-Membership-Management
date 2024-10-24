@@ -13,7 +13,9 @@ public interface ClientService {
 
 static List<GymTrackerDTO> getClient(Long id);
 
-List<GymTrackerDTO> updateClient(Long clientId, int Client);
+    List<GymTrackerDTO> getClient(Long id);
+
+    List<GymTrackerDTO> updateClient(Long clientId, int Client);
 
 void deleteClientById(Long id);
 

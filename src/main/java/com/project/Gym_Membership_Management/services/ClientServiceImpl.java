@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static java.util.Arrays.stream;
 
@@ -59,12 +58,13 @@ public class ClientServiceImpl implements ClientService {
         client.setId((new Client()).getId());
         Client updateClient = clientRepository.save(client);
         log.info(("Updated info for client id{}"));
-
+return objectMapper.convertValue(updateClient,ClientDTO.class);
     }
 
     @Override
     public void deleteClientById(Long id) {
-        clientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("client..."));
+        clientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(" The client is deleted"
+                ));
         clientRepository.deleteById(id);
         log.info("Client with id {} was deleted", id);
     }
