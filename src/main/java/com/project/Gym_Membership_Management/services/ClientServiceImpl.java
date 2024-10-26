@@ -37,34 +37,27 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<GymTrackerDTO> getClient(Long id) {
-        Optional<Client> clientIsRegistred = clientRepository.findById(id);
-        if (!clientIsRegistred.isPresent()) {
-            throw new RuntimeException("User with ID " + id + " is not found");
-        }
-        Client client = clientIsRegistred.get();
-        Optional<GymTracker> gymTrackers = gymTrackerRepository.findById(id);
-        List<GymTrackerDTO> listGymTrackers = gymTrackers.stream()
-                .map(GymTrackerDTO::mapGymTrackerToGymTrackerDTO)
+    public List<ClientDTO> getClients() {
+        List <Client> clients = clientRepository.findAll();
+
+        return clients.stream()
+                .map(client -> objectMapper.convertValue(client,ClientDTO.class))
                 .toList();
-        listGymTrackers.forEach(gymTrackerDTO -> gymTrackerDTO.setId(client.getId()));
-        return listGymTrackers;
     }
 
 
     @Override
-    public List<GymTrackerDTO> updateClient(Long clientId, int client) {
-        Client client = clientRepository.findById(clientId).orElseThrow(()-> new ClientNotFoundException("Client with id " + clientId + " is not found"));
-        client.setId((new Client()).getId());
+    public ClientDTO updateClient(Long clientId, ClientDTO clientDTO) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException("Client with id " + clientId + " is not found"));
         Client updateClient = clientRepository.save(client);
         log.info(("Updated info for client id{}"));
-return (List<GymTrackerDTO>) objectMapper.convertValue(updateClient,ClientDTO.class);
+        return objectMapper.convertValue(updateClient, ClientDTO.class);
     }
 
     @Override
     public void deleteClientById(Long id) {
         clientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(" The client is deleted"
-                ));
+        ));
         clientRepository.deleteById(id);
         log.info("Client with id {} was deleted", id);
     }

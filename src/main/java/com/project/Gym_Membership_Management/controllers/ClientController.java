@@ -21,9 +21,9 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<GymTrackerDTO>> getClientGymTrackers(@PathVariable Long id) {
-        return ResponseEntity.ok(ClientService.getClient(id));
+    @GetMapping
+    public ResponseEntity<List<ClientDTO>> getClients() {
+        return ResponseEntity.ok(clientService.getClients());
     }
 
     @PostMapping
@@ -37,17 +37,16 @@ public class ClientController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping ("/{id}")
-    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO ) {
-        return ResponseEntity.ok(ClientService.getClient(id);
+    @PatchMapping("/{id}")
+    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
+        return ResponseEntity.ok(clientService.updateClient(id, clientDTO));
     }
-
 
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getClients(
             @RequestParam(value = "first name", required = false) String firstName,
             @RequestParam(value = "last name", required = false) String lastName,
             @RequestParam(value = "email", required = false) String email) {
-        return ResponseEntity.ok(ClientService.getClient(822268L);
-}
+        return ResponseEntity.ok(clientService.getClients());
+    }
 }
