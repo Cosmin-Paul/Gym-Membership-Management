@@ -1,14 +1,10 @@
 package com.project.Gym_Membership_Management.controllers;
 
 import com.project.Gym_Membership_Management.models.dtos.ClientDTO;
-import com.project.Gym_Membership_Management.models.dtos.GymTrackerDTO;
-import com.project.Gym_Membership_Management.models.entities.Client;
-import com.project.Gym_Membership_Management.models.entities.GymTracker;
 import com.project.Gym_Membership_Management.services.ClientService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.channels.FileLock;
 import java.util.List;
 
 @RestController
@@ -42,7 +38,7 @@ public class ClientController {
         return ResponseEntity.ok(clientService.updateClient(id, clientDTO));
     }
 
-    @GetMapping
+    @GetMapping ("/search")
     public ResponseEntity<List<ClientDTO>> getClients(
             @RequestParam(value = "first name", required = false) String firstName,
             @RequestParam(value = "last name", required = false) String lastName,

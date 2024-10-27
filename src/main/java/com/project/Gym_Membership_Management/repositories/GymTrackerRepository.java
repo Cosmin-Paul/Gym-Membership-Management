@@ -9,8 +9,4 @@ import java.util.List;
 
 @Repository
 public interface GymTrackerRepository extends JpaRepository<GymTracker, Long> {
-
-    List<GymTracker> findByClassSubscriptionDateTimeBetweenAndLocationContainingIgnoreCaseOrderByClassSubscriptionDateTime(LocalDateTime from, LocalDateTime to, String registred);
-    List<GymTracker> findByEventDateTimeBetweenAndLocationContainingIgnoreCaseOrderByLocationAsc(LocalDateTime from, LocalDateTime to, String registred);
-    List<GymTracker> findByClientId(Long clientId);
 }

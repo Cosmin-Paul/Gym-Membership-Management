@@ -1,4 +1,4 @@
-package unit_test;
+package integration_tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.Gym_Membership_Management.models.dtos.RequestClientDTO;
@@ -48,5 +48,4 @@ public class ClientControllerTest {
     }
 
 
-}
 }
